@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      background-color: black;
+    }
+    .bubble span {
+      position: absolute;
+      bottom: -50px;
+      background: transparent;
+      border-radius: 50%;
+      pointer-events: none;
+      box-shadow: inset 0 0 10px rgba(225, 225, 255, 0.5);
+      animation: animate 4s linear infinite;
+    }
+
+    .bubble span::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform: scale(0.25) translate(-70%, -70%);
+      background: radial-gradient(#fff, transparent);
+      border-radius: 50%;
+    }
+
+    @keyframes animate {
+      0% {
+        transform: translateY(0%);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-1200%);
+        opacity: 1;
+      }
+    }
+  </style>
+  <body>
+    <div class="bubble">
+      <audio src="pop.mp3" id="pop"></audio>
+    </div>
+  </body>
+  <script>
+    function createBubble() {
+      const bubble = document.querySelector(".bubble");
+      const createElement = document.createElement("span");
+      const pop = document.querySelector("#pop");
+      let size = Math.random() * 60;
+
+      createElement.style.width = 20 + size + "px";
+      createElement.style.height = 20 + size + "px";
+      createElement.style.left = Math.random() * innerWidth + "px";
+      bubble.appendChild(createElement);
+
+      setTimeout(() => {
+        createElement.remove();
+      }, 4000);
+
+      pop.play();
+    }
+
+    setInterval(createBubble, 50);
+  </script>
+</html>
